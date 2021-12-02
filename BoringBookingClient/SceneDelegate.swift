@@ -10,12 +10,12 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-    var controller: ViewController?
+    var controller: RestaurantsViewController?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let mainScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: mainScene)
-        window?.rootViewController = ViewController()
+        window?.rootViewController = RestaurantsViewController()
         window?.makeKeyAndVisible()
         window?.backgroundColor = .white
     }
