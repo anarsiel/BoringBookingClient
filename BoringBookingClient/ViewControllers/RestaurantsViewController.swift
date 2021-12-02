@@ -12,6 +12,7 @@ class RestaurantsViewController: UIViewController {
     var userLoginLabel: UILabel!
     var tableView: UITableView!
     
+    var userId: String = "Not Found"
     var userLogin: String
     
     var data: [Restaurant] = [Restaurant(id: "fakeId", name: "Loading...")] {
@@ -22,7 +23,10 @@ class RestaurantsViewController: UIViewController {
     
     init(userLogin: String) {
         self.userLogin = userLogin
+        
         super.init(nibName: nil, bundle: nil)
+        
+        userId = getUserId(userLogin: userLogin)
         
         setTableView()
         
@@ -38,16 +42,21 @@ class RestaurantsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        userLoginLabel = UILabel(frame: CGRect(x: 20, y: 60, width: 200, height: 21))
+        userLoginLabel = UILabel(frame: CGRect(x: 20, y: 60, width: 200, height: 35))
         userLoginLabel.text = "User: \(userLogin)"
-        view.addSubview(userLoginLabel)
+        userLoginLabel.font = UIFont.systemFont(ofSize: CGFloat(30))
         
+        let button = StyledButton(title: "My Reservations", frame: CGRect(x: 20, y: userLoginLabel.frame.maxY + 20, width: 200, height: 50))
+        button.addTarget(self, action: #selector(didShowReservations), for: .touchUpInside)
+        
+        view.addSubview(userLoginLabel)
+        view.addSubview(button)
         view.addSubview(tableView)
         
         NSLayoutConstraint.activate([
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0) ,
-            tableView.topAnchor.constraint(equalTo: userLoginLabel.bottomAnchor, constant: 20) ,
+            tableView.topAnchor.constraint(equalTo: button.bottomAnchor, constant: 20) ,
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0),
         ])
         
@@ -80,6 +89,25 @@ class RestaurantsViewController: UIViewController {
         }
 
         task.resume()
+    }
+    
+    @objc func didShowReservations() {
+        let reservationsViewController = ReservationsViewController(userId: self.userId)
+        self.present(reservationsViewController, animated: true, completion: nil)
+    }
+    
+    func getUserId(userLogin: String) -> String {
+        let url = URL(string: "https://boring-booking.herokuapp.com/users/byLogin/\(userLogin)")!
+
+        let (data, _, _) = URLSession.shared.synchronousDataTask(with: url)
+        
+        guard let _ = data else { return "Not Found" }
+        let decoder = JSONDecoder()
+                    
+        if let user = try? decoder.decode(User.self, from: data!) {
+            return user.id!
+        }
+        return "Not Found"
     }
 }
 

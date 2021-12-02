@@ -7,20 +7,20 @@
 
 import UIKit
 
-class TablesViewController: UIViewController, UITableViewDelegate {
+class ReservationsViewController: UIViewController, UITableViewDelegate {
     
-    var restaurantId: String
+    var userId: String
     
     var tableView: UITableView!
     
-    var data: [Table] = [] {
+    var data: [Reservation] = [] {
         didSet {
             self.tableView.reloadData()
         }
     }
     
-   init(restaurantId: String) {
-        self.restaurantId = restaurantId
+    init(userId: String) {
+        self.userId = userId
         super.init(nibName: nil, bundle: nil)
         
         tableView = UITableView()
@@ -56,16 +56,16 @@ class TablesViewController: UIViewController, UITableViewDelegate {
         tableView.rowHeight = 80
     }
     
-    func setData(completion:@escaping ([Table]) -> ()) {
-        let url = URL(string: "https://boring-booking.herokuapp.com/tables/filter/\(self.restaurantId)/false/false/false/false")!
+    func setData(completion:@escaping ([Reservation]) -> ()) {
+        let url = URL(string: "https://boring-booking.herokuapp.com/reservations/user/\(self.userId)")!
 
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
             guard let _ = data else { return }
             let decoder = JSONDecoder()
             
-            if let jsonTables = try? decoder.decode([Table].self, from: data!) {
+            if let jsonReservations = try? decoder.decode([Reservation].self, from: data!) {
                 DispatchQueue.main.async {
-                    completion(jsonTables)
+                    completion(jsonReservations)
                 }
             }
         }
@@ -74,7 +74,7 @@ class TablesViewController: UIViewController, UITableViewDelegate {
     }
 }
 
-extension TablesViewController: UITableViewDataSource {
+extension ReservationsViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -86,7 +86,22 @@ extension TablesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! MyCell
         
-        cell.title.text = String(data[indexPath.row].number!)
+        let restaurantName = getRestaurantName(restaurantId: data[indexPath.row].restaurant.id)
+        cell.title.text = restaurantName
         return cell
     }
+}
+
+func getRestaurantName(restaurantId: String) -> String {
+    let url = URL(string: "https://boring-booking.herokuapp.com/restaurants/\(restaurantId)")!
+
+    let (data, _, _) = URLSession.shared.synchronousDataTask(with: url)
+    
+    guard let _ = data else { return "Not Found" }
+    let decoder = JSONDecoder()
+                
+    if let restaurant = try? decoder.decode(Restaurant.self, from: data!) {
+        return restaurant.name!
+    }
+    return "Not Found"
 }

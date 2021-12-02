@@ -11,11 +11,11 @@ final class Table: Codable {
     
     var id: String
     
-    var restaurant: Restaurant
+    var restaurant: Restaurant?
     
-    var number: Int32
+    var number: Int32?
 
-    var tableType: TableType
+    var tableType: TableType?
     
     init(id: String, restaurant: Restaurant, number: Int32, tableType: TableType) {
         self.id = id

@@ -12,6 +12,7 @@ class LoginViewController: UIViewController {
     
     var loginTextField: UITextField!
     var passTextField: UITextField!
+    var successAuth: Bool = false
     
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -36,18 +37,40 @@ class LoginViewController: UIViewController {
         )
         passTextField.delegate = self
         
-        let button = StyledButton(frame: CGRect(x: loginTextField.frame.minX + loginTextField.frame.width / 2 - 50, y: passTextField.frame.maxY + 20, width: 100, height: 50))
-        button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
+        let button = StyledButton(title: "login", frame: CGRect(x: loginTextField.frame.minX + loginTextField.frame.width / 2 - 50, y: passTextField.frame.maxY + 20, width: 100, height: 50))
+        button.addTarget(self, action: #selector(didLogin), for: .touchUpInside)
         
         self.view.addSubview(loginTextField)
         self.view.addSubview(passTextField)
         self.view.addSubview(button)
     }
     
-    @objc func buttonAction(sender: UIButton!) {
-        let restaurantsViewController = RestaurantsViewController(userLogin: loginTextField.text!)
+    @objc func didLogin(sender: UIButton!) {
+        let login = loginTextField.text!
+        let pass = passTextField.text!
+        
+        if !setData(login: login, pass: pass) {
+            print("NO")
+            return
+        }
+        
+        let restaurantsViewController = RestaurantsViewController(userLogin: login)
         restaurantsViewController.modalPresentationStyle = .fullScreen
         self.present(restaurantsViewController, animated: true, completion: nil)
+    }
+    
+    func setData(login: String, pass: String) -> Bool {
+        let url = URL(string: "https://boring-booking.herokuapp.com/users/byLogin/\(login)")!
+
+        let (data, _, _) = URLSession.shared.synchronousDataTask(with: url)
+        
+        guard let _ = data else { return false }
+        let decoder = JSONDecoder()
+                    
+        if let user = try? decoder.decode(User.self, from: data!) {
+            return user.password == pass
+        }
+        return false
     }
 }
 
@@ -65,23 +88,10 @@ class StyledTextField: UITextField {
         self.returnKeyType = UIReturnKeyType.done
         self.clearButtonMode = UITextField.ViewMode.whileEditing
         self.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
-        self.clearButtonMode = .whileEditing
+        self.autocapitalizationType = .none
    }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-}
-
-class StyledButton: UIButton {
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        self.backgroundColor = .systemBlue
-        self.setTitle("Login", for: .normal)
-   }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
 }
