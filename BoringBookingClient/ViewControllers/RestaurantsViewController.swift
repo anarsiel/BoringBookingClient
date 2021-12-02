@@ -9,7 +9,10 @@ import UIKit
 
 class RestaurantsViewController: UIViewController {
     
+    var userLoginLabel: UILabel!
     var tableView: UITableView!
+    
+    var userLogin: String
     
     var data: [Restaurant] = [Restaurant(id: "fakeId", name: "Loading...")] {
         didSet {
@@ -17,15 +20,11 @@ class RestaurantsViewController: UIViewController {
         }
     }
     
-    init() {
+    init(userLogin: String) {
+        self.userLogin = userLogin
         super.init(nibName: nil, bundle: nil)
         
-        tableView = UITableView()
-        tableView.delegate = self
-        tableView.dataSource = self
-        
-        tableView.allowsSelection = true
-        tableView.translatesAutoresizingMaskIntoConstraints = false
+        setTableView()
         
         setData { [weak self] (data) in
             self?.data = data
@@ -39,18 +38,31 @@ class RestaurantsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        userLoginLabel = UILabel(frame: CGRect(x: 20, y: 60, width: 200, height: 21))
+        userLoginLabel.text = "User: \(userLogin)"
+        view.addSubview(userLoginLabel)
+        
         view.addSubview(tableView)
-
+        
         NSLayoutConstraint.activate([
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0) ,
-            tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0) ,
+            tableView.topAnchor.constraint(equalTo: userLoginLabel.bottomAnchor, constant: 20) ,
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0),
         ])
         
         tableView.register(MyCell.self, forCellReuseIdentifier: "cell")
         tableView.dataSource = self
         tableView.rowHeight = 80
+    }
+    
+    func setTableView() {
+        tableView = UITableView()
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        tableView.allowsSelection = true
+        tableView.translatesAutoresizingMaskIntoConstraints = false
     }
     
     func setData(completion:@escaping ([Restaurant]) -> ()) {

@@ -13,6 +13,7 @@
 		842D9EC72758245C00FF0D58 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842D9EC62758245C00FF0D58 /* User.swift */; };
 		842D9EC9275826FF00FF0D58 /* TablesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842D9EC8275826FF00FF0D58 /* TablesViewController.swift */; };
 		842D9ECD2758277200FF0D58 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842D9ECC2758277200FF0D58 /* TableViewCell.swift */; };
+		845563882758460600AD8F4B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845563872758460600AD8F4B /* LoginViewController.swift */; };
 		84D06672274FBFD7008DC8C4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D06671274FBFD7008DC8C4 /* AppDelegate.swift */; };
 		84D06674274FBFD7008DC8C4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D06673274FBFD7008DC8C4 /* SceneDelegate.swift */; };
 		84D06676274FBFD7008DC8C4 /* RestaurantsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D06675274FBFD7008DC8C4 /* RestaurantsViewController.swift */; };
@@ -27,6 +28,7 @@
 		842D9EC62758245C00FF0D58 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		842D9EC8275826FF00FF0D58 /* TablesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TablesViewController.swift; sourceTree = "<group>"; };
 		842D9ECC2758277200FF0D58 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
+		845563872758460600AD8F4B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		84D0666E274FBFD7008DC8C4 /* BoringBookingClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BoringBookingClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84D06671274FBFD7008DC8C4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		84D06673274FBFD7008DC8C4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -64,6 +66,7 @@
 				842D9ECB2758276000FF0D58 /* Common */,
 				84D06675274FBFD7008DC8C4 /* RestaurantsViewController.swift */,
 				842D9EC8275826FF00FF0D58 /* TablesViewController.swift */,
+				845563872758460600AD8F4B /* LoginViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -184,6 +187,7 @@
 				84D06672274FBFD7008DC8C4 /* AppDelegate.swift in Sources */,
 				84D06674274FBFD7008DC8C4 /* SceneDelegate.swift in Sources */,
 				842D9EC72758245C00FF0D58 /* User.swift in Sources */,
+				845563882758460600AD8F4B /* LoginViewController.swift in Sources */,
 				842D9EC9275826FF00FF0D58 /* TablesViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
