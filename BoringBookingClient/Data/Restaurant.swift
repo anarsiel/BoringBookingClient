@@ -1,10 +1,3 @@
-//
-//  Restaurant.swift
-//  BoringBookingClient
-//
-//  Created by Blagoi on 29.11.2021.
-//
-
 import Foundation
 
 struct Restaurant: Codable {

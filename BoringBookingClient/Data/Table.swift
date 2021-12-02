@@ -1,10 +1,3 @@
-//
-//  table.swift
-//  BoringBookingClient
-//
-//  Created by Blagoi on 29.11.2021.
-//
-
 import Foundation
 
 final class Table: Codable {

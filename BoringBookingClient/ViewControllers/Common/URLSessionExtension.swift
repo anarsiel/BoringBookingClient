@@ -1,10 +1,3 @@
-//
-//  URLExtension.swift
-//  BoringBookingClient
-//
-//  Created by Blagoi on 02.12.2021.
-//
-
 import Foundation
 
 extension URLSession {

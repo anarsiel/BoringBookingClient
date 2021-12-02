@@ -1,10 +1,3 @@
-//
-//  ViewController.swift
-//  BoringBookingClient
-//
-//  Created by Blagoi on 25.11.2021.
-//
-
 import UIKit
 
 class RestaurantsViewController: UIViewController {

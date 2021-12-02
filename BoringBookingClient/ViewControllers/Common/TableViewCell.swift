@@ -1,10 +1,3 @@
-//
-//  TableViewCell.swift
-//  BoringBookingClient
-//
-//  Created by Blagoi on 02.12.2021.
-//
-
 import UIKit
 
 class MyCell: UITableViewCell {
