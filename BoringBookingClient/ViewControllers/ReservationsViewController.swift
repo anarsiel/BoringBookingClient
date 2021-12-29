@@ -12,8 +12,14 @@ class ReservationsViewController: UIViewController, UITableViewDelegate {
         }
     }
     
-    init(userId: String) {
+    var pathToServer: String
+    var token: String
+    
+    init(userId: String, pathToServer: String, token: String) {
         self.userId = userId
+        self.pathToServer = pathToServer
+        self.token = token
+        
         super.init(nibName: nil, bundle: nil)
         
         tableView = UITableView()
@@ -50,9 +56,13 @@ class ReservationsViewController: UIViewController, UITableViewDelegate {
     }
     
     func setData(completion:@escaping ([Reservation]) -> ()) {
-        let url = URL(string: "https://boring-booking.herokuapp.com/reservations/user/\(self.userId)")!
+        let urlReq = createURLRequest(
+            url: "reservations/me/user/\(self.userId)",
+            httpMethod: "GET",
+            authToken: token
+        )
 
-        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+        let task = URLSession.shared.dataTask(with: urlReq) { (data, response, error) in
             guard let _ = data else { return }
             let decoder = JSONDecoder()
             
@@ -83,18 +93,25 @@ extension ReservationsViewController: UITableViewDataSource {
         cell.title.text = restaurantName
         return cell
     }
-}
-
-func getRestaurantName(restaurantId: String) -> String {
-    let url = URL(string: "https://boring-booking.herokuapp.com/restaurants/\(restaurantId)")!
-
-    let (data, _, _) = URLSession.shared.synchronousDataTask(with: url)
     
-    guard let _ = data else { return "Not Found" }
-    let decoder = JSONDecoder()
-                
-    if let restaurant = try? decoder.decode(Restaurant.self, from: data!) {
-        return restaurant.name!
+    func getRestaurantName(restaurantId: String) -> String {
+//        let url = URL(string: "\(pathToServer)/restaurants/me/\(restaurantId)")!
+        
+        let url = createURL(
+            url: "restaurants/me/\(restaurantId)",
+            httpMethod: "GET",
+            authToken: token
+        )
+
+        let (data, _, _) = URLSession.shared.synchronousDataTask(with: url)
+        
+        guard let _ = data else { return "Not Found" }
+        let decoder = JSONDecoder()
+                    
+        if let restaurant = try? decoder.decode(Restaurant.self, from: data!) {
+            return restaurant.name!
+        }
+        return "Not Found"
     }
-    return "Not Found"
+
 }

@@ -2,7 +2,9 @@ import UIKit
 
 class TablesViewController: UIViewController, UITableViewDelegate {
     
+    var pathToServer: String
     var restaurantId: String
+    var token: String
     
     var tableView: UITableView!
     
@@ -12,8 +14,11 @@ class TablesViewController: UIViewController, UITableViewDelegate {
         }
     }
     
-   init(restaurantId: String) {
+    init(restaurantId: String, pathToServer: String, token: String) {
         self.restaurantId = restaurantId
+        self.pathToServer = pathToServer
+        self.token = token
+        
         super.init(nibName: nil, bundle: nil)
         
         tableView = UITableView()
@@ -50,9 +55,9 @@ class TablesViewController: UIViewController, UITableViewDelegate {
     }
     
     func setData(completion:@escaping ([Table]) -> ()) {
-        let url = URL(string: "https://boring-booking.herokuapp.com/tables/filter/\(self.restaurantId)/false/false/false/false")!
+        let urlRequest = createURLRequest(url: "/tables/me/filter/\(self.restaurantId)/false/false/false/false", authToken: token)
 
-        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+        let task = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
             guard let _ = data else { return }
             let decoder = JSONDecoder()
             

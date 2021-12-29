@@ -22,6 +22,9 @@
 		84D06676274FBFD7008DC8C4 /* RestaurantsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D06675274FBFD7008DC8C4 /* RestaurantsViewController.swift */; };
 		84D0667B274FBFD9008DC8C4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84D0667A274FBFD9008DC8C4 /* Assets.xcassets */; };
 		84D0667E274FBFD9008DC8C4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84D0667C274FBFD9008DC8C4 /* LaunchScreen.storyboard */; };
+		93BE97C0277B4A06005A0778 /* UserLoginPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BE97BF277B4A06005A0778 /* UserLoginPayload.swift */; };
+		93BE97C2277BA397005A0778 /* URLRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BE97C1277BA397005A0778 /* URLRequest.swift */; };
+		93BE97C4277BDAE2005A0778 /* Me.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BE97C3277BDAE2005A0778 /* Me.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +45,9 @@
 		84D0667A274FBFD9008DC8C4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		84D0667D274FBFD9008DC8C4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		84D0667F274FBFD9008DC8C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		93BE97BF277B4A06005A0778 /* UserLoginPayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLoginPayload.swift; sourceTree = "<group>"; };
+		93BE97C1277BA397005A0778 /* URLRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequest.swift; sourceTree = "<group>"; };
+		93BE97C3277BDAE2005A0778 /* Me.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Me.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +68,8 @@
 				8426098C275568EE00C5D569 /* Table.swift */,
 				842D9EC4275822B000FF0D58 /* Reservation.swift */,
 				842D9EC62758245C00FF0D58 /* User.swift */,
+				93BE97BF277B4A06005A0778 /* UserLoginPayload.swift */,
+				93BE97C3277BDAE2005A0778 /* Me.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -84,6 +92,7 @@
 				842D9ECC2758277200FF0D58 /* TableViewCell.swift */,
 				84556389275876DD00AD8F4B /* StyledButton.swift */,
 				8455638D27587CB600AD8F4B /* URLSessionExtension.swift */,
+				93BE97C1277BA397005A0778 /* URLRequest.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -192,11 +201,14 @@
 				8455638E27587CB600AD8F4B /* URLSessionExtension.swift in Sources */,
 				8426098B2755685E00C5D569 /* Restaurant.swift in Sources */,
 				8455638C275878B600AD8F4B /* ReservationsViewController.swift in Sources */,
+				93BE97C2277BA397005A0778 /* URLRequest.swift in Sources */,
+				93BE97C4277BDAE2005A0778 /* Me.swift in Sources */,
 				842D9EC5275822B000FF0D58 /* Reservation.swift in Sources */,
 				8455638A275876DD00AD8F4B /* StyledButton.swift in Sources */,
 				842D9ECD2758277200FF0D58 /* TableViewCell.swift in Sources */,
 				84D06676274FBFD7008DC8C4 /* RestaurantsViewController.swift in Sources */,
 				84D06672274FBFD7008DC8C4 /* AppDelegate.swift in Sources */,
+				93BE97C0277B4A06005A0778 /* UserLoginPayload.swift in Sources */,
 				84D06674274FBFD7008DC8C4 /* SceneDelegate.swift in Sources */,
 				842D9EC72758245C00FF0D58 /* User.swift in Sources */,
 				845563882758460600AD8F4B /* LoginViewController.swift in Sources */,

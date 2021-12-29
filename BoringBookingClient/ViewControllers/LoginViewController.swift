@@ -3,6 +3,9 @@ import UIKit
 
 class LoginViewController: UIViewController {
     
+    var pathToServer: String = "http://localhost:8080"
+//    var pathToServer: String = "https://boring-booking.herokuapp.com"
+    
     var loginTextField: UITextField!
     var passTextField: UITextField!
     var successAuth: Bool = false
@@ -38,28 +41,62 @@ class LoginViewController: UIViewController {
         self.view.addSubview(button)
     }
     
+    func doLogin(login: String, password: String) -> String {
+        
+        let semaphore = DispatchSemaphore (value: 0)
+        
+        let body = ["login": login, "password": password]
+        let bodyData = try? JSONSerialization.data(
+            withJSONObject: body,
+            options: []
+        )
+        
+        let request = createURLRequest(
+            url: "users/login/",
+            httpMethod: "POST",
+            httpBody: bodyData
+        )
+        
+        var res: String?
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+          guard let data = data else {
+            print(String(describing: error))
+            semaphore.signal()
+            return
+          }
+          res = String(data: data, encoding: .utf8)!
+            semaphore.signal()
+        }
+
+        task.resume()
+        semaphore.wait()
+        
+        return res!
+    }
+    
     @objc func didLogin(sender: UIButton!) {
         let login = loginTextField.text!
         let pass = passTextField.text!
         
-        if !setData(login: login, pass: pass) {
-            print("NO")
-            return
-        }
+        let token = doLogin(login: login, password: pass)
         
-        let restaurantsViewController = RestaurantsViewController(userLogin: login)
+        let restaurantsViewController = RestaurantsViewController(
+            userLogin: login,
+            pathToServer: pathToServer,
+            token: token
+        )
+
         restaurantsViewController.modalPresentationStyle = .fullScreen
         self.present(restaurantsViewController, animated: true, completion: nil)
     }
     
     func setData(login: String, pass: String) -> Bool {
-        let url = URL(string: "https://boring-booking.herokuapp.com/users/byLogin/\(login)")!
+        let url = URL(string: "\(pathToServer)/users/me/byLogin/\(login)")!
 
         let (data, _, _) = URLSession.shared.synchronousDataTask(with: url)
         
         guard let _ = data else { return false }
         let decoder = JSONDecoder()
-                    
         if let user = try? decoder.decode(User.self, from: data!) {
             return user.password == pass
         }

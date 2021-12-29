@@ -7,6 +7,8 @@ class RestaurantsViewController: UIViewController {
     
     var userId: String = "Not Found"
     var userLogin: String
+    var pathToServer: String
+    var token: String
     
     var data: [Restaurant] = [Restaurant(id: "fakeId", name: "Loading...")] {
         didSet {
@@ -14,8 +16,10 @@ class RestaurantsViewController: UIViewController {
         }
     }
     
-    init(userLogin: String) {
+    init(userLogin: String, pathToServer: String, token: String) {
         self.userLogin = userLogin
+        self.pathToServer = pathToServer
+        self.token = token
         
         super.init(nibName: nil, bundle: nil)
         
@@ -68,9 +72,10 @@ class RestaurantsViewController: UIViewController {
     }
     
     func setData(completion:@escaping ([Restaurant]) -> ()) {
-        let url = URL(string: "https://boring-booking.herokuapp.com/restaurants")!
+        let urlRequest = createURLRequest(url: "restaurants/me", authToken: token)
+        
 
-        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+        let task = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
             guard let _ = data else { return }
             let decoder = JSONDecoder()
             
@@ -85,18 +90,25 @@ class RestaurantsViewController: UIViewController {
     }
     
     @objc func didShowReservations() {
-        let reservationsViewController = ReservationsViewController(userId: self.userId)
+        let reservationsViewController = ReservationsViewController(
+            userId: self.userId,
+            pathToServer: pathToServer,
+            token: token
+        )
         self.present(reservationsViewController, animated: true, completion: nil)
     }
     
     func getUserId(userLogin: String) -> String {
-        let url = URL(string: "https://boring-booking.herokuapp.com/users/byLogin/\(userLogin)")!
+        let url = URL(string: "\(pathToServer)/users/byLogin/\(userLogin)")!
+//        let url = createURL(url: "users/me/", authToken: token)
 
         let (data, _, _) = URLSession.shared.synchronousDataTask(with: url)
         
         guard let _ = data else { return "Not Found" }
         let decoder = JSONDecoder()
-                    
+        
+        print(String(data: data!, encoding: .utf8)!)
+        
         if let user = try? decoder.decode(User.self, from: data!) {
             return user.id!
         }
@@ -124,7 +136,11 @@ extension RestaurantsViewController: UITableViewDataSource {
 extension RestaurantsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let newViewController = TablesViewController(restaurantId: data[indexPath.row].id)
+        let newViewController = TablesViewController(
+            restaurantId: data[indexPath.row].id,
+            pathToServer: pathToServer,
+            token: token
+        )
         show(newViewController, sender: self)
     }
 }
