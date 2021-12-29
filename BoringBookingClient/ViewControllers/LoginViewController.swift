@@ -51,7 +51,7 @@ class LoginViewController: UIViewController {
             options: []
         )
         
-        let request = createURLRequest(
+        let request = createSecureUrlRequest(
             url: "users/login/",
             httpMethod: "POST",
             httpBody: bodyData

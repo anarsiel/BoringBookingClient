@@ -55,7 +55,7 @@ class TablesViewController: UIViewController, UITableViewDelegate {
     }
     
     func setData(completion:@escaping ([Table]) -> ()) {
-        let urlRequest = createURLRequest(url: "/tables/me/filter/\(self.restaurantId)/false/false/false/false", authToken: token)
+        let urlRequest = createSecureUrlRequest(url: "/tables/me/filter/\(self.restaurantId)/false/false/false/false", authToken: token)
 
         let task = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
             guard let _ = data else { return }

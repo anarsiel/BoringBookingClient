@@ -72,7 +72,7 @@ class RestaurantsViewController: UIViewController {
     }
     
     func setData(completion:@escaping ([Restaurant]) -> ()) {
-        let urlRequest = createURLRequest(url: "restaurants/me", authToken: token)
+        let urlRequest = createSecureUrlRequest(url: "restaurants/me/getAll", authToken: token)
         
 
         let task = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
@@ -99,18 +99,15 @@ class RestaurantsViewController: UIViewController {
     }
     
     func getUserId(userLogin: String) -> String {
-        let url = URL(string: "\(pathToServer)/users/byLogin/\(userLogin)")!
-//        let url = createURL(url: "users/me/", authToken: token)
+        let url = createSecureUrlRequest(url: "users/me/", authToken: token)
 
         let (data, _, _) = URLSession.shared.synchronousDataTask(with: url)
         
         guard let _ = data else { return "Not Found" }
         let decoder = JSONDecoder()
         
-        print(String(data: data!, encoding: .utf8)!)
-        
-        if let user = try? decoder.decode(User.self, from: data!) {
-            return user.id!
+        if let user = try? decoder.decode(Me.self, from: data!) {
+            return user.id
         }
         return "Not Found"
     }

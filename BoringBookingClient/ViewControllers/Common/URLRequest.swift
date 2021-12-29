@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-func createURLRequest(url: String, httpMethod: String = "GET", httpBody: Data? = nil, authToken: String? = nil, setContentTypeJSON: Bool = true) -> URLRequest {
+func createSecureUrlRequest(url: String, httpMethod: String = "GET", httpBody: Data? = nil, authToken: String? = nil, setContentTypeJSON: Bool = true) -> URLRequest {
     let host = "http://localhost:8080/"
     
     var request = URLRequest(url: URL(string: host + url)!, timeoutInterval: Double.infinity)

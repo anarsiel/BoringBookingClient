@@ -56,8 +56,8 @@ class ReservationsViewController: UIViewController, UITableViewDelegate {
     }
     
     func setData(completion:@escaping ([Reservation]) -> ()) {
-        let urlReq = createURLRequest(
-            url: "reservations/me/user/\(self.userId)",
+        let urlReq = createSecureUrlRequest(
+            url: "reservations/me/get/userId",
             httpMethod: "GET",
             authToken: token
         )
@@ -95,10 +95,8 @@ extension ReservationsViewController: UITableViewDataSource {
     }
     
     func getRestaurantName(restaurantId: String) -> String {
-//        let url = URL(string: "\(pathToServer)/restaurants/me/\(restaurantId)")!
-        
-        let url = createURL(
-            url: "restaurants/me/\(restaurantId)",
+        let url = createSecureUrlRequest(
+            url: "restaurants/me/get/id/\(restaurantId)",
             httpMethod: "GET",
             authToken: token
         )
@@ -107,6 +105,8 @@ extension ReservationsViewController: UITableViewDataSource {
         
         guard let _ = data else { return "Not Found" }
         let decoder = JSONDecoder()
+        
+        print(String(data: data!, encoding: .utf8)!)
                     
         if let restaurant = try? decoder.decode(Restaurant.self, from: data!) {
             return restaurant.name!
