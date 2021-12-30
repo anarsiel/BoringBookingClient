@@ -1,6 +1,6 @@
 import UIKit
 
-class TablesViewController: UIViewController, UITableViewDelegate {
+class TablesViewController: UIViewController {
     
     var pathToServer: String
     var restaurantId: String
@@ -55,7 +55,7 @@ class TablesViewController: UIViewController, UITableViewDelegate {
     }
     
     func setData(completion:@escaping ([Table]) -> ()) {
-        let urlRequest = createSecureUrlRequest(url: "/tables/me/filter/\(self.restaurantId)/false/false/false/false", authToken: token)
+        let urlRequest = createSecureUrlRequest(url: "tables/me/filter/\(self.restaurantId)/false/false/false/false", authToken: token)
 
         let task = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
             guard let _ = data else { return }
@@ -86,5 +86,13 @@ extension TablesViewController: UITableViewDataSource {
         
         cell.title.text = String(data[indexPath.row].number!)
         return cell
+    }
+}
+
+extension TablesViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let vc = OneTableViewController(restarantId: restaurantId, tableId: data[indexPath.row].id, token: token)
+        show(vc, sender: self)
     }
 }

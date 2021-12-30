@@ -8,7 +8,6 @@ class LoginViewController: UIViewController {
     
     var loginTextField: UITextField!
     var passTextField: UITextField!
-    var successAuth: Bool = false
     
     init() {
         super.init(nibName: nil, bundle: nil)

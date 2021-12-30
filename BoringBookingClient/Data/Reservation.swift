@@ -2,17 +2,17 @@ import Foundation
 
 final class Reservation: Codable {
     
-    var id: String
+    var id: String?
     
-    var restaurant: Restaurant
+    var restaurant: Restaurant?
     
-    var table: Table
+    var table: Table?
     
-    var user: User
+    var user: User?
     
-    var startTimestamp: String
+    var startTimestamp: String?
     
-    var endTimestamp: String
+    var endTimestamp: String?
     
     var comment: String?
         

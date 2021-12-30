@@ -89,7 +89,7 @@ extension ReservationsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! MyCell
         
-        let restaurantName = getRestaurantName(restaurantId: data[indexPath.row].restaurant.id)
+        let restaurantName = getRestaurantName(restaurantId: data[indexPath.row].restaurant!.id)
         cell.title.text = restaurantName
         return cell
     }

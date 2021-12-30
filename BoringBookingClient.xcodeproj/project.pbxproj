@@ -22,6 +22,7 @@
 		84D06676274FBFD7008DC8C4 /* RestaurantsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D06675274FBFD7008DC8C4 /* RestaurantsViewController.swift */; };
 		84D0667B274FBFD9008DC8C4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84D0667A274FBFD9008DC8C4 /* Assets.xcassets */; };
 		84D0667E274FBFD9008DC8C4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84D0667C274FBFD9008DC8C4 /* LaunchScreen.storyboard */; };
+		934F18CA277D84C500972BEB /* ReservationPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934F18C9277D84C500972BEB /* ReservationPayload.swift */; };
 		937082EF277CFF340010374B /* OneTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 937082EE277CFF340010374B /* OneTableViewController.swift */; };
 		93BE97C0277B4A06005A0778 /* UserLoginPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BE97BF277B4A06005A0778 /* UserLoginPayload.swift */; };
 		93BE97C2277BA397005A0778 /* URLRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BE97C1277BA397005A0778 /* URLRequest.swift */; };
@@ -46,6 +47,7 @@
 		84D0667A274FBFD9008DC8C4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		84D0667D274FBFD9008DC8C4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		84D0667F274FBFD9008DC8C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		934F18C9277D84C500972BEB /* ReservationPayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationPayload.swift; sourceTree = "<group>"; };
 		937082EE277CFF340010374B /* OneTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneTableViewController.swift; sourceTree = "<group>"; };
 		93BE97BF277B4A06005A0778 /* UserLoginPayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLoginPayload.swift; sourceTree = "<group>"; };
 		93BE97C1277BA397005A0778 /* URLRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequest.swift; sourceTree = "<group>"; };
@@ -70,8 +72,6 @@
 				8426098C275568EE00C5D569 /* Table.swift */,
 				842D9EC4275822B000FF0D58 /* Reservation.swift */,
 				842D9EC62758245C00FF0D58 /* User.swift */,
-				93BE97BF277B4A06005A0778 /* UserLoginPayload.swift */,
-				93BE97C3277BDAE2005A0778 /* Me.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -119,6 +119,7 @@
 		84D06670274FBFD7008DC8C4 /* BoringBookingClient */ = {
 			isa = PBXGroup;
 			children = (
+				937082F0277D840C0010374B /* Payloads */,
 				842D9ECA2758274900FF0D58 /* ViewControllers */,
 				842609872755673D00C5D569 /* Data */,
 				84D06671274FBFD7008DC8C4 /* AppDelegate.swift */,
@@ -128,6 +129,16 @@
 				84D0667F274FBFD9008DC8C4 /* Info.plist */,
 			);
 			path = BoringBookingClient;
+			sourceTree = "<group>";
+		};
+		937082F0277D840C0010374B /* Payloads */ = {
+			isa = PBXGroup;
+			children = (
+				93BE97BF277B4A06005A0778 /* UserLoginPayload.swift */,
+				93BE97C3277BDAE2005A0778 /* Me.swift */,
+				934F18C9277D84C500972BEB /* ReservationPayload.swift */,
+			);
+			path = Payloads;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -217,6 +228,7 @@
 				842D9EC72758245C00FF0D58 /* User.swift in Sources */,
 				845563882758460600AD8F4B /* LoginViewController.swift in Sources */,
 				842D9EC9275826FF00FF0D58 /* TablesViewController.swift in Sources */,
+				934F18CA277D84C500972BEB /* ReservationPayload.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
