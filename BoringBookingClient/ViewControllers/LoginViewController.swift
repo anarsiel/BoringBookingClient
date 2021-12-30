@@ -32,6 +32,7 @@ class LoginViewController: UIViewController {
             frame: CGRect(x: loginTextField.frame.minX, y: loginTextField.frame.maxY + 20, width: loginTextField.frame.width, height: loginTextField.frame.height)
         )
         passTextField.delegate = self
+        passTextField.isSecureTextEntry = true
         
         let button = StyledButton(title: "login", frame: CGRect(x: loginTextField.frame.minX + loginTextField.frame.width / 2 - 50, y: passTextField.frame.maxY + 20, width: 100, height: 50))
         button.addTarget(self, action: #selector(didLogin), for: .touchUpInside)
@@ -41,7 +42,7 @@ class LoginViewController: UIViewController {
         self.view.addSubview(button)
     }
     
-    func doLogin(login: String, password: String) -> String {
+    func doLogin(login: String, password: String) -> String? {
         
         let semaphore = DispatchSemaphore (value: 0)
         
@@ -57,10 +58,9 @@ class LoginViewController: UIViewController {
             httpBody: bodyData
         )
         
-        var res: String?
+        var res: String = "error"
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
           guard let data = data else {
-            print(String(describing: error))
             semaphore.signal()
             return
           }
@@ -71,7 +71,10 @@ class LoginViewController: UIViewController {
         task.resume()
         semaphore.wait()
         
-        return res!
+        if res.contains("error") {
+            return nil
+        }
+        return res
     }
     
     @objc func didLogin(sender: UIButton!) {
@@ -80,14 +83,16 @@ class LoginViewController: UIViewController {
         
         let token = doLogin(login: login, password: pass)
         
-        let restaurantsViewController = RestaurantsViewController(
-            userLogin: login,
-            pathToServer: pathToServer,
-            token: token
-        )
+        token.map { token in
+            let restaurantsViewController = RestaurantsViewController(
+                userLogin: login,
+                pathToServer: pathToServer,
+                token: token
+            )
 
-        restaurantsViewController.modalPresentationStyle = .fullScreen
-        self.present(restaurantsViewController, animated: true, completion: nil)
+            restaurantsViewController.modalPresentationStyle = .fullScreen
+            self.present(restaurantsViewController, animated: true, completion: nil)
+        }
     }
     
     func setData(login: String, pass: String) -> Bool {

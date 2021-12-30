@@ -22,6 +22,7 @@
 		84D06676274FBFD7008DC8C4 /* RestaurantsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D06675274FBFD7008DC8C4 /* RestaurantsViewController.swift */; };
 		84D0667B274FBFD9008DC8C4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84D0667A274FBFD9008DC8C4 /* Assets.xcassets */; };
 		84D0667E274FBFD9008DC8C4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84D0667C274FBFD9008DC8C4 /* LaunchScreen.storyboard */; };
+		937082EF277CFF340010374B /* OneTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 937082EE277CFF340010374B /* OneTableViewController.swift */; };
 		93BE97C0277B4A06005A0778 /* UserLoginPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BE97BF277B4A06005A0778 /* UserLoginPayload.swift */; };
 		93BE97C2277BA397005A0778 /* URLRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BE97C1277BA397005A0778 /* URLRequest.swift */; };
 		93BE97C4277BDAE2005A0778 /* Me.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BE97C3277BDAE2005A0778 /* Me.swift */; };
@@ -45,6 +46,7 @@
 		84D0667A274FBFD9008DC8C4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		84D0667D274FBFD9008DC8C4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		84D0667F274FBFD9008DC8C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		937082EE277CFF340010374B /* OneTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneTableViewController.swift; sourceTree = "<group>"; };
 		93BE97BF277B4A06005A0778 /* UserLoginPayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLoginPayload.swift; sourceTree = "<group>"; };
 		93BE97C1277BA397005A0778 /* URLRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequest.swift; sourceTree = "<group>"; };
 		93BE97C3277BDAE2005A0778 /* Me.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Me.swift; sourceTree = "<group>"; };
@@ -82,6 +84,7 @@
 				842D9EC8275826FF00FF0D58 /* TablesViewController.swift */,
 				845563872758460600AD8F4B /* LoginViewController.swift */,
 				8455638B275878B600AD8F4B /* ReservationsViewController.swift */,
+				937082EE277CFF340010374B /* OneTableViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -199,6 +202,7 @@
 			files = (
 				8426098D275568EE00C5D569 /* Table.swift in Sources */,
 				8455638E27587CB600AD8F4B /* URLSessionExtension.swift in Sources */,
+				937082EF277CFF340010374B /* OneTableViewController.swift in Sources */,
 				8426098B2755685E00C5D569 /* Restaurant.swift in Sources */,
 				8455638C275878B600AD8F4B /* ReservationsViewController.swift in Sources */,
 				93BE97C2277BA397005A0778 /* URLRequest.swift in Sources */,
